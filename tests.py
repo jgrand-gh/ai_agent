@@ -1,6 +1,7 @@
 from functions.get_files_info import get_files_info
 from functions.get_file_content import get_file_content
 from functions.write_file import write_file
+from functions.run_python import run_python_file
 
 def test_get_files_info():
     function_name = "get_files_info"
@@ -66,5 +67,28 @@ def test_write_file():
     print(f"Testing '{function_name}' for '{working_dir}' and '{file_path}' and '{content}'")
     print(result + "\n")
 
+def test_run_python_file():
+    function_name = "run_python_file"
+
+    working_dir, file_path = "calculator", "main.py"
+    result = run_python_file(working_dir, file_path)
+    print(f"Testing '{function_name}' for '{working_dir}' and '{file_path}'")
+    print(result + "\n")
+
+    working_dir, file_path = "calculator", "tests.py"
+    result = run_python_file(working_dir, file_path)
+    print(f"Testing '{function_name}' for '{working_dir}' and '{file_path}'")
+    print(result + "\n")
+
+    working_dir, file_path = "calculator", "../main.py"
+    result = run_python_file(working_dir, file_path)
+    print(f"Testing '{function_name}' for '{working_dir}' and '{file_path}'")
+    print(result + "\n")
+
+    working_dir, file_path = "calculator", "nonexistent.py"
+    result = run_python_file(working_dir, file_path)
+    print(f"Testing '{function_name}' for '{working_dir}' and '{file_path}'")
+    print(result + "\n")
+
 if __name__ == "__main__":
-    test_write_file()
+    test_run_python_file()
