@@ -20,6 +20,3 @@ def get_file_content(working_directory, file_path):
         return f"Error reading file: {e}"
 
     return file_content_string
-
-if __name__ == "__main__":
-    get_file_content("calculator", "main.py")

@@ -22,6 +22,3 @@ def get_files_info(working_directory, directory=None):
         return f"Error generating output: {e}"
 
     return "\n".join(output_list)
-
-if __name__ == "__main__":
-    get_files_info("calculator")
