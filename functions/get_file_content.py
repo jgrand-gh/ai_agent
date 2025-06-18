@@ -1,4 +1,5 @@
 import os
+from google.genai import types
 
 def get_file_content(working_directory, file_path):
     abs_w_dir = os.path.abspath(working_directory)
@@ -20,3 +21,17 @@ def get_file_content(working_directory, file_path):
         return f"Error reading file: {e}"
 
     return file_content_string
+
+schema_get_file_content = types.FunctionDeclaration(
+    name="get_file_content",
+    description="Gets and outputs the content of a file, constrained to the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="The path to the file to generate output from, relative to the working directory.",
+            ),
+        },
+    ),
+)
