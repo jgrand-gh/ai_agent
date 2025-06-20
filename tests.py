@@ -91,4 +91,4 @@ def test_run_python_file():
     print(result + "\n")
 
 if __name__ == "__main__":
-    test_run_python_file()
+    test_write_file()
