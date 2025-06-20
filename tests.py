@@ -75,6 +75,11 @@ def test_run_python_file():
     print(f"Testing '{function_name}' for '{working_dir}' and '{file_path}'")
     print(result + "\n")
 
+    working_dir, file_path = "calculator", "main.py"
+    result = run_python_file(working_dir, file_path, "10 + 10")
+    print(f"Testing '{function_name}' for '{working_dir}' and '{file_path}'")
+    print(result + "\n")
+
     working_dir, file_path = "calculator", "tests.py"
     result = run_python_file(working_dir, file_path)
     print(f"Testing '{function_name}' for '{working_dir}' and '{file_path}'")
@@ -91,4 +96,4 @@ def test_run_python_file():
     print(result + "\n")
 
 if __name__ == "__main__":
-    test_write_file()
+    test_run_python_file()

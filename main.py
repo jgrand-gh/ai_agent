@@ -24,10 +24,17 @@ def main():
     if verbose:
         print(f"User prompt: {user_prompt}")
 
-    # temporary one-item list that will eventually hold the whole conversation
     messages = [types.Content(role="user", parts=[types.Part(text=user_prompt)]),]
 
-    generate_content(client, messages, verbose)
+    for i in range(20):
+        try:
+            final_response = generate_content(client, messages, verbose)
+
+            if final_response:
+                print(final_response)
+                break
+        except Exception as e:
+            print(f"Error encountered in generate_content: {e}")
 
 
 def generate_content(client, messages, verbose):
@@ -41,17 +48,28 @@ def generate_content(client, messages, verbose):
         print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
         print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
 
+    if response.candidates:
+        for candidate in response.candidates:
+            messages.append(candidate.content)
+
     if not response.function_calls:
-        print(response.text)
         return response.text
 
+    function_responses = []
     for function_call_part in response.function_calls:
         function_call_result = call_function(function_call_part, verbose)
 
-        if not function_call_result.parts[0].function_response.response:
-            raise Exception("Bad things happened")
+        if not function_call_result.parts or not function_call_result.parts[0].function_response.response:
+            raise Exception("Function call returned an empty response")
         if verbose:
             print(f"-> {function_call_result.parts[0].function_response.response}")
+        
+        function_responses.append(function_call_result.parts[0])
+
+    if not function_responses:
+        raise Exception("Function call returned no responses")
+    
+    messages.append(types.Content(role="tool", parts=function_responses))
 
 
 if __name__ == "__main__":
