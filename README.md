@@ -8,7 +8,7 @@ This project is an AI-powered coding assistant that can list files, read file co
 - Read file contents securely
 - Execute Python files with optional arguments
 - Write or overwrite files (with directory constraints)
-- Calculator application for evaluating mathematical expressions
+- Calculator application for evaluating mathematical expressions (can be used to test AI Agent capabilities)
 
 ## Requirements
 
