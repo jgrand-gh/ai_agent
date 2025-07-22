@@ -89,7 +89,7 @@ You can then ask the AI Agent to help fix the bug:
 python main.py "The calculator returns -2 for '3 + 5'. How do I fix this?"
 ```
 
-The agent will analyze the code and suggest a correction to restore
+The agent will analyze the code and suggest a correction to restore the intended behavior.
 
 ## License
 
